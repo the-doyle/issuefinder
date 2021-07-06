@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+
+    <div class="text-center">
+        <br><br>
+        <h4>{{page}}</h4>
+        <h5>{% issue %}</h5>
+        <br /><br /><br>
+    </div>
+
+    
+    <iframe src="{% static name %}" alt="My image"></iframe>
+
+{% endblock %}

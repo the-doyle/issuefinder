@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class='row'>
+        <div class="col text-center">
+            <br><br>
+            <h4>Upload a batch of PDF contracts to get started</h4>
+            <br /><br /><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <form name="form" action='/results/' id="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="custom-file">
+                    <input required accept="application/pdf" id='files' name='files' asp-for="File" type="file" multiple class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Select files (PDFs only)</label>
+                </div>
+            </form>
+        </div>
+        <div class='col-6'>
+            <div class="form-group">
+                <select required title='Select document type...' data-live-search='true' form='form' id='doc_type' name='doc_type' class="selectpicker form-control" >
+                    <option value='revenue contracts'>Revenue contracts</option>
+                    <option value='lease contracts'>Lease contracts</option>
+                    <option value='debt'>Debt</option>
+                    <option value='other'>Other</option>
+                </select>
+            </div>
+        </div>
+    </div><br/>
+    <div class="row">
+        <div class='col-6'>
+                <div class='form-group text-center font-weight-bold'>
+                    <label class='text-center' for='user_search'>Enter search phrases, separated by commas</label>
+                    <textarea placeholder='Compliance reporting, pending credit transaction, etc,' class='form-control'  rows='3' form="form" id="user_search" name="user_search"></textarea>
+                </div>
+        </div>
+        <div class='col-6'>
+            <p class="text-center font-weight-bold">Select terms from our library</p>   
+            <div class='form-group'>
+                <div class="btn-group flex-wrap btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-outline-dark shadow-none mr-2 mb-2 rounded-pill">
+                        <input form='form' type="checkbox" name="s-warranty" id="s-warranty" autocomplete="off" > Warranty
+                    </label>
+                    <label class="btn btn-outline-dark shadow-none mr-2 mb-2 rounded-pill">
+                        <input form='form' type="checkbox" name="s-repurchase" id="s-repurchase" autocomplete="off"> Repurchase
+                    </label>
+                    <label class="btn btn-outline-dark shadow-none mr-2 mb-2 rounded-pill">
+                        <input form='form' type="checkbox" name="s-fob" id="s-fob" autocomplete="off"> FOB
+                    </label>
+                    <label class="btn btn-outline-dark shadow-none mr-2 mb-2 rounded-pill">
+                        <input form='form' type="checkbox" name="s-obligation" id="s-obligation" autocomplete="off"> Obligation
+                    </label>
+                    <label class="btn btn-outline-dark shadow-none mr-2 mb-2 rounded-pill">
+                        <input form='form' type="checkbox" name="s-guarantee" id="s-guarantee" autocomplete="off"> Guarantee
+                    </label>
+                    <label class="btn btn-outline-dark shadow-none mr-2 mb-2 rounded-pill">
+                        <input form='form' type="checkbox" name="s-shipping" id="s-shipping" autocomplete="off"> Shipping
+                    </label>
+                    <label class="btn btn-outline-dark shadow-none mr-2 mb-2 rounded-pill">
+                        <input form='form' type="checkbox" name="s-price-protection" id="s-price-protection" autocomplete="off"> Price protection
+                    </label>
+                    <label class="btn btn-outline-dark shadow-none mr-2 mb-2 rounded-pill">
+                        <input form='form' type="checkbox" name="s-price" id="s-price" autocomplete="off"> Price
+                    </label>
+                    <label class="btn btn-outline-dark shadow-none mr-2 mb-2 rounded-pill">
+                        <input form='form' type="checkbox" name="s-termination" id="s-termination" autocomplete="off"> Termination
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-6'>
+            <div class='form-group'>
+                <button id='submit-button' form="form" type="submit" class="btn btn-outline-primary form-control">Results</button>
+                <small id="submitHelp" class="form-text text-muted">Processing may take several minutes</small>
+            </div>
+        </div>
+    </div>
+{% endblock %}

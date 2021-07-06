@@ -1,0 +1,126 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    
+    <title>Home</title>
+  </head>
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light text-light bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="text-light navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">IssueFinder</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a href='/' class="nav-link text-light">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href='/about' class="nav-link text-light">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <body>
+        <div class="container">
+            <main role="main" class="pb-3">
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
+    </body>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript for selectpicker-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files for selectpicker -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js"></script>
+
+    <script type="text/javascript">
+
+        $('.custom-file-input').change(function (e) {
+            var files = [];
+            for (var i = 0; i < $(this)[0].files.length; i++) {
+                files.push($(this)[0].files[i].name);
+            }
+
+            if (files.length == 1)
+            {
+                var output_str = '1 file selected';
+            } else {
+                var output_str = files.length.toString() + ' files selected';
+            }
+
+            $(this).next('.custom-file-label').html(output_str);
+        });
+
+        $("#submit-button").click(function() {
+
+            if ($('#files').get(0).files.length != 0) 
+            {
+                if ($("#doc_type").get(0).value.length != 0)
+                {
+                    $("#submit-button").blur();
+                    $("#submit-button").html(
+                        "<span class='spinner-border spinner-border-sm'></span>   Loading..."
+                    );
+                    $("#submit-button").removeClass('btn-outline-primary');
+                    $("#submit-button").addClass('btn-info');
+                }
+            }
+        });
+
+        function download_table_as_csv(table_id, separator = ',') {
+            // Select rows from table_id
+            var rows = document.querySelectorAll('table#' + table_id + ' tr');
+            // Construct csv
+            var csv = [];
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll('td, th');
+                for (var j = 0; j < cols.length; j++) {
+                    // Clean innertext to remove multiple spaces and jumpline (break csv)
+                    var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+                    // Escape double-quote with double-double-quote (see https://stackoverflow.com/questions/17808511/properly-escape-a-double-quote-in-csv)
+                    data = data.replace(/"/g, '""');
+                    // Push escaped string
+                    row.push('"' + data + '"');
+                }
+                csv.push(row.join(separator));
+            }
+            var csv_string = csv.join('\n');
+            // Download it
+            var filename = 'export_' + table_id + '_' + new Date().toLocaleDateString() + '.csv';
+            var link = document.createElement('a');
+            link.style.display = 'none';
+            link.setAttribute('target', '_blank');
+            link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+    </script>
+  </body>
+</html>

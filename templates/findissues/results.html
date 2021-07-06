@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="text-center text-primary">
+        <br><br>
+        <h4>{{message}}</h4>
+        <br /><br /><br>
+    </div>
+
+    <table id='table' class="table table-hover">
+        <thead class='bg-light'>
+            <tr>
+                <th></th>
+                <th scope="col">Term</th>
+                <th scope="col"># Of Occurences</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for issue_row in issues %}
+                <tr data-toggle="collapse" data-target="#{{issue_row.term_no_whitespace}}" class="accordion-toggle">
+                    <th scope="row"><a class="btn btn-outline-dark">Expand</a></th>
+                    <th class='text-dark'>{{issue_row.term}}</th>
+                    <th class='text-dark'>{{issue_row.ISSUE}}</th>
+                </tr>
+                <tr class="accordion-body collapse text-primary" id="{{issue_row.term_no_whitespace}}">
+                    <th scope="row"></th>
+                    <th scope="row">Document name</th>
+                    <th scope="row">Page #</th>
+                </tr> 
+                {% for row in data %}
+                    {% if row.ISSUE == issue_row.term %}
+                        <tr class="accordion-body collapse" id="{{issue_row.term_no_whitespace}}">
+                            <th scope="row"><a class="btn btn-outline-primary" target='_blank' href="{% url 'document' name=row.PDF.name page=row.PAGE %}">Open</a></th>
+                            <td>{{row.PDF.name}}</td>
+                            <td>{{row.PAGE}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class='float-right'>
+        <a href="#" onclick="download_table_as_csv('table');" class="btn btn-dark">Download results</a>
+    </div>
+    <br /><br /><br /><br />
+    {% if scanned_docs_exist == "Yes" %}
+        <div class="text-center text-secondary">
+            <br><br>
+            <h5 class='text-info'>Some of your documents ({{scanned_docs_len}}) are likely scanned images</h5>
+            <h7 class='text-info'>IssueFinder located the following terms and highlighted the line where each term is found in the document</h7><br/>
+            <br /><br />
+        </div>
+
+        <table id='table' class="table table-hover">
+            <thead class='bg-light'>
+                <tr>
+                    <th></th>
+                    <th scope="col">Term</th>
+                    <th scope="col"># Of Occurences</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for issue_row in issues_ocr %}
+                    <tr data-toggle="collapse" data-target="#{{issue_row.term_no_whitespace}}-ocr" class="accordion-toggle">
+                        <th scope="row"><a class="btn btn-outline-dark">Expand</a></th>
+                        <th class='text-dark'>{{issue_row.term}}</th>
+                        <th class='text-dark'>{{issue_row.ISSUE}}</th>
+                    </tr>
+                    <tr class="accordion-body collapse text-info" id="{{issue_row.term_no_whitespace}}-ocr">
+                        <th scope="row"></th>
+                        <th scope="row">Document name</th>
+                        <th scope="row">Page #</th>
+                    </tr>
+                    {% for row in data_ocr %}
+                        {% if row.ISSUE == issue_row.term %}
+                            <tr class="accordion-body collapse" id="{{issue_row.term_no_whitespace}}-ocr">
+                                <th scope="row"><a target="_blank" class="btn btn-outline-info" href="{% url 'document' name=row.PDF.name page=row.PAGE %}">Open</a></th>
+                                <td>{{row.PDF.name}}</td>
+                                <td>{{row.PAGE}}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}
+
+<!--Fix issue with spaces for element ids and terms-->
