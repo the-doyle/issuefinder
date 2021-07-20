@@ -1,6 +1,6 @@
 # Introduction
 
-IssueFinder is a PoC web application I created as part of my summer internship at Connor Group. I received permission to include most of the source code on my personal GitHub (Microsoft and SnowFlake API credentials removed).
+IssueFinder is a PoC web application I created as part of my summer internship at Connor Group. I received permission to include most of the source code on my personal GitHub (Microsoft and SnowFlake API credentials removed). The application won't work without these credentials and routes are configured for Mac/Windows local usage within a Docker container - so unfortunately, you won't be able to clone into this repo and try it out. If you'd like to see a demo of the prototype, check out this short video. 
 
 As a user, you can:
 
@@ -8,7 +8,7 @@ As a user, you can:
 * Enter search terms 
 * View all located terms in table format (document, page num, term located) and highlighted in the original document
 
-The application is built using Python/Django and Bootstrap. Included are a Dockerfile/docker-compose.yml for containerizing the application. IssueFinder is currently deployed on a virtual machine and being tested with 40+ professionals.
+The application is built using Python/Django and Bootstrap. Included are a Dockerfile/docker-compose.yml for dockerizing the application. IssueFinder is currently deployed on a virtual machine and being tested with 40+ professionals.
 
 I contributed 100% of the code for this application on the front and back-end. Happy to talk about anything in this repo! 
 
