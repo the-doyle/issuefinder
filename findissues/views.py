@@ -82,13 +82,13 @@ def results(request) :
 
         try:
             engine = create_engine(URL(
-                account = 'connorgroup.west-us-2.azure',
-                user = 'CG_ETL_USER',
-                password = 'a!1029rad',
-                database = 'RAD_DB',
-                schema = 'RAD_SCHEMA',
-                warehouse = 'RAD_WH',
-                role='CG_SYSADMIN',
+                account = 'snowflake',
+                user = 'credentials',
+                password = 'normally',
+                database = 'go',
+                schema = 'here',
+                warehouse = '',
+                role='',
             ))
         except:
             print('engine failed')
