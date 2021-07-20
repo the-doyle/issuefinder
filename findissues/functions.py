@@ -19,8 +19,8 @@ def find_issues(files, dest_filepath, keywords):
     Authenticate
     Authenticates your credentials and creates a client.
     '''
-    subscription_key = "00c780da9bc249c1861a1103d2fca96e"
-    endpoint = "https://radcomputervision.cognitiveservices.azure.com/"
+    subscription_key = "computer vision credentials"
+    endpoint = "normally go here"
     computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
     #switch into the proper directory if needed
@@ -98,9 +98,7 @@ def find_issues(files, dest_filepath, keywords):
 
                                 start_highlight_pixels = start_pixels + (match_index * pixels_per_character)
                                 end_highlight_pixels = start_highlight_pixels + (match_len * pixels_per_character)
-
-
-                            
+                           
                                 aw = start_highlight_pixels
                                 ah = bounding_box[1] * ppi_height
                                 bw = end_highlight_pixels
@@ -109,15 +107,6 @@ def find_issues(files, dest_filepath, keywords):
                                 ch = bounding_box[5] * ppi_height
                                 dw = end_highlight_pixels
                                 dh = bounding_box[7] * ppi_height
-
-                                # aw = bounding_box[0] * ppi_width
-                                # ah = bounding_box[1] * ppi_height
-                                # bw = bounding_box[2] * ppi_width
-                                # bh = bounding_box[3] * ppi_height
-                                # cw = bounding_box[4] * ppi_width
-                                # ch = bounding_box[5] * ppi_height
-                                # dw = bounding_box[6] * ppi_width
-                                # dh = bounding_box[7] * ppi_height
                                 
                                 quad = fitz.Quad((aw, ah), (bw, bh), (cw, dh), (dw, ch))
                                 list_quads.append(quad)
@@ -143,9 +132,6 @@ def find_issues(files, dest_filepath, keywords):
                             issues.append(phrase)
 
                     page_num += 1
-                # if len(issues) > start_len: # only save a new PDF if there are highlighted issues... 
-                #     save_filename = f.name + '_modified'
-                #     doc.save(save_filename)
             
             save_filename = dest_filepath + "/modified_" + f.name
             doc.save(save_filename)
