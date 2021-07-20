@@ -14,7 +14,7 @@ As a user, you can:
 
 * Stack: Python/Django and Bootstrap. 
 * Deployment stuff: Included are a Dockerfile/docker-compose.yml for dockerizing the application. IssueFinder is currently deployed on a virtual machine and being tested with 40+ professionals.
-* Notable libraries: PyMuPDF, azure.cognitiveservices.vision.computervision, pandas
+* Notable libraries: `PyMuPDF`, `azure.cognitiveservices.vision.computervision`, `pandas`
 
 I contributed 100% of the code for this application on the front and back-end. Happy to talk about anything in this repo! 
 
