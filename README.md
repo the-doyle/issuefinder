@@ -10,7 +10,11 @@ As a user, you can:
 * Enter search terms 
 * View all located terms in table format (document, page num, term located) and highlighted in the original document
 
-The application is built using Python/Django and Bootstrap. Included are a Dockerfile/docker-compose.yml for dockerizing the application. IssueFinder is currently deployed on a virtual machine and being tested with 40+ professionals.
+**Details:**
+
+* Stack: Python/Django and Bootstrap. 
+* Deployment stuff: Included are a Dockerfile/docker-compose.yml for dockerizing the application. IssueFinder is currently deployed on a virtual machine and being tested with 40+ professionals.
+* Notable libraries: PyMuPDF, azure.cognitiveservices.vision.computervision, pandas
 
 I contributed 100% of the code for this application on the front and back-end. Happy to talk about anything in this repo! 
 
