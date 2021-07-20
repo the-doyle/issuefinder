@@ -17,7 +17,7 @@ I contributed 100% of the code for this application on the front and back-end. H
 I spent 90% of my time working on findissues/functions.py and findissues/views.py - which include all the functionality for processing and searching through the uploaded PDFs. Here's what IssueFinder does:
 
 * Accepts two inputs: a batch of user-uploaded PDFs, and user-inputted search terms
-* Uploads user-inputted search to a Snowflake DB 
+* Uploads user-inputted search terms to a Snowflake DB for internal use
 * Stores each PDF (locally, for now)
 * Parses through each text PDF to locate search terms
 * Interfaces with Microsoft's Computer Vision Read API to find search terms in image PDFs (more details below)
