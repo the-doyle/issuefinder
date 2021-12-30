@@ -2,7 +2,7 @@
 
 IssueFinder is a PoC web application I created as part of my summer internship at Connor Group. I received permission to include most of the source code on my personal GitHub (Microsoft and SnowFlake API credentials removed). The application won't work without these credentials and routes are configured for Mac/Windows local usage within a Docker container - so unfortunately, you won't be able to clone into this repo and try it out. 
 
-If you'd like to see a demo of the prototype, check out this short video. 
+If you'd like to see a demo of the prototype, check out this short video: https://www.loom.com/share/d09a93db4466423d9a6602b7616f4eb2
 
 As a user, you can:
 
